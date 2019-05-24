@@ -5,5 +5,6 @@ export class City {
   name: string;
   description: string;
   userId: number;
+  dateAdded: string;
   photos: Photo[];
 }

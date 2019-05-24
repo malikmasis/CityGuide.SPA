@@ -20,11 +20,22 @@
               >
                 View
               </button>
-              <button type="button" class="btn btn-sm btn-outline-secondary">
+              <button
+                type="button"
+                routerLink="/cityAdd/{{ city.id }}"
+                class="btn btn-sm btn-outline-secondary"
+              >
                 Edit
               </button>
+              <button
+                type="button"
+                (click)="deleteCity(city.id, city.name)"
+                class="btn btn-sm btn-outline-secondary"
+              >
+                Remove
+              </button>
             </div>
-            <small class="text-muted">9 mins</small>
+            <small class="text-muted">{{ city.dateAdded }}</small>
           </div>
         </div>
       </div>

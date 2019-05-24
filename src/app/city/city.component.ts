@@ -10,10 +10,19 @@ import { CityService } from "../services/city.service";
 })
 export class CityComponent implements OnInit {
   constructor(private cityService: CityService) {}
-  cities: City[]
+  cities: City[];
   ngOnInit() {
     this.cityService.getCities().subscribe(data => {
       this.cities = data;
     });
+  }
+
+  deleteCity(cityId, name) {
+    if (confirm("Are you sure to delete " + name)) {
+      this.cityService.deleteCityById(cityId).then(data => {
+        if (data === true)
+          this.cities = this.cities.filter(data => data.id != cityId);
+      });
+    }
   }
 }
