@@ -31,9 +31,16 @@ export class CityService {
     );
   }
 
-  add(city) {
+  add(city: City) {
     this.httpClient.post(this.path + "cities/add", city).subscribe(data => {
       this.alertifyService.success("Şehir Başarıyla Eklendi");
+      this.router.navigateByUrl("/cityDetail/" + data["id"]);
+    });
+  }
+
+  update(city: City) {
+    this.httpClient.post(this.path + "cities/update", city).subscribe(data => {
+      this.alertifyService.success("Şehir Başarıyla Güncellendi");
       this.router.navigateByUrl("/cityDetail/" + data["id"]);
     });
   }

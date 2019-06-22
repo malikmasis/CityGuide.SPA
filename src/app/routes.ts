@@ -8,6 +8,8 @@ export const appRoutes: Routes = [
   { path: "city", component: CityComponent },
   { path: "cityAdd", component: CityAddComponent },
   { path: "cityAdd/:cityId", component: CityAddComponent },
+  // { path: "cityUpdate/", component: CityAddComponent },
+  { path: "cityUpdate/:cityId", component: CityAddComponent },
   { path: "cityDetail/:cityId", component: CityDetailComponent },
   { path: "register", component: RegisterComponent },
   { path: "**", redirectTo: "city", pathMatch: "full" }
