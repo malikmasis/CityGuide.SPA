@@ -4,12 +4,11 @@ import { ActivatedRoute } from "@angular/router";
 
 import {
   FormGroup,
-  FormControl,
   Validators,
   FormBuilder
 } from "@angular/forms";
 import { City } from "src/app/models/city";
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: "app-city-add",
@@ -21,8 +20,8 @@ export class CityAddComponent implements OnInit {
     private cityService: CityService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private activatedRoute: ActivatedRoute,
-  ) { }
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   city: City;
   cityAddForm: FormGroup;
@@ -43,11 +42,16 @@ export class CityAddComponent implements OnInit {
     });
   }
 
-  add() {
+  add(cityId: any) {
     if (this.cityAddForm.valid) {
       this.city = Object.assign({}, this.cityAddForm.value);
-      this.city.userId = this.authService.getCurrentUserId();
-      this.cityService.add(this.city);
+      if (cityId == null || cityId == undefined) {
+        this.city.userId = this.authService.getCurrentUserId();
+        this.cityService.add(this.city);
+      } else {
+        this.city.id = cityId;
+        this.cityService.update(this.city);
+      }
     }
   }
 
