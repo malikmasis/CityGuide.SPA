@@ -7,11 +7,11 @@
         class="form-cityadd"
       >
         <h2 class="mt-3 pt-3">Yeni bir şehir ekle</h2>
+        <!-- [ngModel]="city?.name" -->
         <div class="form-group">
           <input
             type="text"
             id="name"
-            [ngModel]="city?.name"
             formControlName="name"
             class="form-control"
             placeholder="Şehir adı"
@@ -31,7 +31,6 @@
           <app-ngx-editor
             class="form-control"
             id="description"
-            [ngModel]="city?.description"
             name="description"
             [placeholder]="'Buraya notlarınızı giriniz'"
             formControlName="description"

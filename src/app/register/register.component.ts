@@ -22,8 +22,11 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
   registerUser: any = {};
+  loginUser: any = {};
+  
   ngOnInit() {
     this.createRegisterForm();
+      this.authService.login(this.loginUser);
   }
 
   createRegisterForm() {
@@ -50,10 +53,17 @@ export class RegisterComponent implements OnInit {
       : { mismatch: true };
   }
 
-  register() {
+  register(userId: any) {
     if (this.registerForm.valid) {
       this.registerUser = Object.assign({}, this.registerForm.value);
-      this.authService.register(this.registerUser);
+
+      if (userId == null || userId == undefined) {
+        //this.city.userId = this.authService.getCurrentUserId();
+        this.authService.register(this.registerUser);
+      } else {
+        this.authService.registerUpdate(this.registerUser);
+      }
+      
     }
   }
 }

@@ -18,6 +18,7 @@ export class AuthService {
   ) {}
 
   path = "http://localhost:61061/api/auth/";
+  pathUser = "http://localhost:61061/api/users/";
   userToken: any;
   decodedToken: any;
   jwtHelper: JwtHelper = new JwtHelper();
@@ -50,6 +51,18 @@ export class AuthService {
       })
       .subscribe(data => {});
       this.alertifyService.success("Başarılı bir şekilde kayıt gerçekleştirildi.");
+      this.router.navigateByUrl("/city");
+  }
+
+  registerUpdate(registerUser: RegisterUser) {
+    let headers = new HttpHeaders();
+    headers = headers.append("Content-Type", "application/json");
+    this.httpClient
+      .post(this.pathUser + "update", registerUser, {
+        headers: headers
+      })
+      .subscribe(data => {});
+      this.alertifyService.success("Başarılı bir şekilde güncelleme gerçekleştirildi.");
       this.router.navigateByUrl("/city");
   }
 

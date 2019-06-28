@@ -38,6 +38,8 @@ export class CityAddComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.cityService.getCityById(params["cityId"]).subscribe(data => {
         this.city = data;
+        this.cityAddForm.get('name').setValue(data.name);
+        this.cityAddForm.get('description').setValue(data.description);
       });
     });
   }
