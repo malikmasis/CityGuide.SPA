@@ -16,7 +16,7 @@
         <a class="nav-link" *ngIf="!isAuthenticated" routerLink="register" routerLinkActive="active">Register</a>
       </li>
     </ul>
-    <form *ngIf="!isAuthenticated" #loginForm="ngForm" (ngSubmit)="login(2)" class="form-inline my-2 my-lg-0">
+    <form *ngIf="!isAuthenticated" #loginForm="ngForm" (ngSubmit)="login()" class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" name="userName" 
       [(ngModel)]="loginUser.userName" required type="text" placeholder="User Name">
       <input class="form-control mr-sm-2" name="password" 

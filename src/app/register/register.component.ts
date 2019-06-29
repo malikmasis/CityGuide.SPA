@@ -18,15 +18,24 @@ export class RegisterComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   registerForm: FormGroup;
   registerUser: any = {};
   loginUser: any = {};
-  
+
   ngOnInit() {
     this.createRegisterForm();
-      this.authService.login(this.loginUser);
+    this.authService.login(this.loginUser);
+    let userId = this.authService.getCurrentUserId();
+    if (userId != null && userId != undefined) {
+      this.authService.getUserById(userId).subscribe(data => {
+        this.loginUser = data;
+        this.registerForm.get('userName').setValue(data.userName);
+        console.log(data.userName + "--")
+        //this.registerForm.get('userName').setValue(data.name);
+      });
+    }
   }
 
   createRegisterForm() {
@@ -53,17 +62,19 @@ export class RegisterComponent implements OnInit {
       : { mismatch: true };
   }
 
-  register(userId: any) {
+  register() {
+    let userId = this.authService.getCurrentUserId();
+    console.log(userId + "--");
+
     if (this.registerForm.valid) {
       this.registerUser = Object.assign({}, this.registerForm.value);
 
       if (userId == null || userId == undefined) {
-        //this.city.userId = this.authService.getCurrentUserId();
         this.authService.register(this.registerUser);
       } else {
         this.authService.registerUpdate(this.registerUser);
       }
-      
+
     }
   }
 }

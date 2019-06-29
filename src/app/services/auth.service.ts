@@ -6,6 +6,7 @@ import { JwtHelper, tokenNotExpired } from "angular2-jwt";
 import { Router } from "@angular/router";
 import { AlertifyService } from "./alertify.service";
 import { RegisterUser } from "../models/registerUser";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -81,5 +82,9 @@ export class AuthService {
 
   getCurrentUserId() {
     return this.jwtHelper.decodeToken(this.token).nameid;
+  }
+
+  getUserById(userId): Observable<RegisterUser> {
+    return this.httpClient.get<RegisterUser>(this.pathUser + "detail/?id=" + userId);
   }
 }
