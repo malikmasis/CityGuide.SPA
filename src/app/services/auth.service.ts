@@ -6,6 +6,7 @@ import { JwtHelper, tokenNotExpired } from "angular2-jwt";
 import { Router } from "@angular/router";
 import { AlertifyService } from "./alertify.service";
 import { RegisterUser } from "../models/registerUser";
+import { UpdateUser } from "../models/updateUser";
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -16,7 +17,7 @@ export class AuthService {
     private httpClient: HttpClient,
     private router: Router,
     private alertifyService: AlertifyService
-  ) {}
+  ) { }
 
   path = "http://localhost:61061/api/auth/";
   pathUser = "http://localhost:61061/api/users/";
@@ -50,21 +51,24 @@ export class AuthService {
       .post(this.path + "register", registerUser, {
         headers: headers
       })
-      .subscribe(data => {});
-      this.alertifyService.success("Başarılı bir şekilde kayıt gerçekleştirildi.");
-      this.router.navigateByUrl("/city");
+      .subscribe(data => { });
+    this.alertifyService.success("Başarılı bir şekilde kayıt gerçekleştirildi.");
+    this.router.navigateByUrl("/city");
   }
 
-  registerUpdate(registerUser: RegisterUser) {
+  registerUpdate(updateUser: UpdateUser) {
     let headers = new HttpHeaders();
     headers = headers.append("Content-Type", "application/json");
     this.httpClient
-      .post(this.pathUser + "update", registerUser, {
+      .post(this.pathUser + "update", updateUser, {
         headers: headers
       })
-      .subscribe(data => {});
-      this.alertifyService.success("Başarılı bir şekilde güncelleme gerçekleştirildi.");
-      this.router.navigateByUrl("/city");
+      .subscribe(data => {
+        if (data == true) {
+          this.alertifyService.success("Başarılı bir şekilde güncelleme gerçekleştirildi.");
+          this.router.navigateByUrl("/city");
+        }
+      });
   }
 
   logOut() {

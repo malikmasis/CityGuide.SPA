@@ -32,8 +32,6 @@ export class RegisterComponent implements OnInit {
       this.authService.getUserById(userId).subscribe(data => {
         this.loginUser = data;
         this.registerForm.get('userName').setValue(data.userName);
-        console.log(data.userName + "--")
-        //this.registerForm.get('userName').setValue(data.name);
       });
     }
   }
@@ -64,7 +62,6 @@ export class RegisterComponent implements OnInit {
 
   register() {
     let userId = this.authService.getCurrentUserId();
-    console.log(userId + "--");
 
     if (this.registerForm.valid) {
       this.registerUser = Object.assign({}, this.registerForm.value);
@@ -72,9 +69,9 @@ export class RegisterComponent implements OnInit {
       if (userId == null || userId == undefined) {
         this.authService.register(this.registerUser);
       } else {
+        this.registerUser.id = userId;
         this.authService.registerUpdate(this.registerUser);
       }
-
     }
   }
 }
