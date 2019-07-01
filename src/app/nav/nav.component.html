@@ -25,9 +25,12 @@
     </form>
     <div>
         <ul class="navbar-nav mr-auto">
+            <li class="nav-item" *ngIf="isAuthenticated" style="margin-top: 8px;">
+                Hoş Geldiniz {{loginUser.userName}}
+            </li>
             <li class="nav-item">
               <a class="nav-link" *ngIf="isAuthenticated" routerLink="register" routerLinkActive="active">
-                <img src="http://res.cloudinary.com/dandahlwt/image/upload/v1558697530/dzwi8qjcuqc64rhwegx8.png" alt="Smiley face" height="32" width="32">
+                <img class="user" src="http://res.cloudinary.com/dandahlwt/image/upload/v1558697530/dzwi8qjcuqc64rhwegx8.png" alt="Smiley face" height="32" width="32">
               </a>
           </li>
           <li class="nav-item">
