@@ -16,6 +16,7 @@ import { CityAddComponent } from "./city/city-add/city-add.component";
 import { AlertifyService } from "./services/alertify.service";
 import { RegisterComponent } from "./register/register.component";
 import { PhotoComponent } from './photo/photo.component';
+import { LeftMenuComponent } from './left-menu/left-menu.component';
 
 @NgModule({
    declarations: [
@@ -25,7 +26,8 @@ import { PhotoComponent } from './photo/photo.component';
       CityDetailComponent,
       CityAddComponent,
       RegisterComponent,
-      PhotoComponent
+      PhotoComponent,
+      LeftMenuComponent
    ],
    imports: [
       BrowserModule,
