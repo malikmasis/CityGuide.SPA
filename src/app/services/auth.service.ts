@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { LoginUser } from "../models/loginUser";
+import { environment } from '../../environments/environment';
 
 import { HttpHeaders, HttpClient } from "@angular/common/http";
 import { JwtHelper, tokenNotExpired } from "angular2-jwt";
@@ -19,8 +20,8 @@ export class AuthService {
     private alertifyService: AlertifyService
   ) { }
 
-  path = "http://localhost:61061/api/auth/";
-  pathUser = "http://localhost:61061/api/users/";
+  path = environment.apiUrl + "auth/";
+  pathUser = environment.apiUrl + "users/";
   userToken: any;
   decodedToken: any;
   jwtHelper: JwtHelper = new JwtHelper();

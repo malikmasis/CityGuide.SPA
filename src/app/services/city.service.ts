@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { Photo } from "../models/Photo";
 import { Router } from "@angular/router";
 import { AlertifyService } from "./alertify.service";
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: "root"
@@ -15,31 +16,30 @@ export class CityService {
     private router: Router,
     private alertifyService: AlertifyService
   ) {}
-  path = "http://localhost:61061/api/";
 
   getCities(): Observable<City[]> {
-    return this.httpClient.get<City[]>(this.path + "cities");
+    return this.httpClient.get<City[]>(environment.apiUrl + "cities");
   }
 
   getCityById(cityId): Observable<City> {
-    return this.httpClient.get<City>(this.path + "cities/detail/?id=" + cityId);
+    return this.httpClient.get<City>(environment.apiUrl + "cities/detail/?id=" + cityId);
   }
 
   getPhotosByCity(cityId): Observable<Photo[]> {
     return this.httpClient.get<Photo[]>(
-      this.path + "cities/photos/?cityId=" + cityId
+      environment.apiUrl + "cities/photos/?cityId=" + cityId
     );
   }
 
   add(city: City) {
-    this.httpClient.post(this.path + "cities/add", city).subscribe(data => {
+    this.httpClient.post(environment.apiUrl + "cities/add", city).subscribe(data => {
       this.alertifyService.success("Şehir Başarıyla Eklendi");
       this.router.navigateByUrl("/cityDetail/" + data["id"]);
     });
   }
 
   update(city: City) {
-    this.httpClient.post(this.path + "cities/update", city).subscribe(data => {
+    this.httpClient.post(environment.apiUrl + "cities/update", city).subscribe(data => {
       this.alertifyService.success("Şehir Başarıyla Güncellendi");
       this.router.navigateByUrl("/cityDetail/" + data["id"]);
     });
@@ -51,7 +51,7 @@ export class CityService {
 
     return new Promise(resolve => {
       this.httpClient
-        .post(this.path + "cities/delete/?id=" + cityId, { headers: headers })
+        .post(environment.apiUrl + "cities/delete/?id=" + cityId, { headers: headers })
         .subscribe(
           res => {
             resolve(res);

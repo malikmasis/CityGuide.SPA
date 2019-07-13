@@ -4,6 +4,7 @@ import { AlertifyService } from "../services/alertify.service";
 import { AuthService } from "../services/auth.service";
 import { ActivatedRoute } from "@angular/router";
 import { Photo } from "../models/photo";
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: "app-photo",
@@ -20,7 +21,6 @@ export class PhotoComponent implements OnInit {
   photos: Photo[] = [];
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
-  baseUrl = "http://localhost:61061/api/";
   currentMain: Photo;
   currentCity: any;
 
@@ -33,7 +33,7 @@ export class PhotoComponent implements OnInit {
 
   initializeUploader() {
     this.uploader = new FileUploader({
-      url: this.baseUrl + "cities/" + this.currentCity + "/photos",
+      url: environment + "cities/" + this.currentCity + "/photos",
       authToken: "Bearer " + localStorage.getItem("token"),
       isHTML5: true,
       allowedFileType: ["image"],
